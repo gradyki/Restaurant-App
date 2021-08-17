@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import {restaurantsUrl} from './services/index'
+import axios from 'axios';
 
 function App() {
+  const [restaurants, setRestaurants] = useState(null)
+
+  useEffect(() => {
+    const getRestaurants = async ()=>{
+      const resp = await axios.get(`${restaurantsUrl}`)
+      setRestaurants(resp)
+      console.log('inside', restaurants)
+    }
+    
+    getRestaurants()
+    console.log('outside', restaurants)
+  }, [])
+  
+  console.log('outer', restaurants)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     test
     </div>
   );
 }
