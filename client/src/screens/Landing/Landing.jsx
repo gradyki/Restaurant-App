@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { useState } from "react";
+import Search from "../../components/Search/Search";
 
 export default function Landing(props) {
   const [search, setSearch] = useState(null);
@@ -15,15 +16,11 @@ export default function Landing(props) {
     <div>
       <div>Landing page</div>
       <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button>Submit</button>
-        </form>
+        <Search
+          setSearch={setSearch}
+          handleSubmit={handleSubmit}
+          search={search}
+        />
       </div>
     </div>
   );
