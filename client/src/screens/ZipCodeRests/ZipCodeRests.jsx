@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { key } from "../../services/index";
+import RestaurantCards from "../../components/RestaurantCards/RestaurantCards";
 
 export default function ZipCodeRests() {
   const [restaurants, setRestaurants] = useState(null);
@@ -20,6 +21,7 @@ export default function ZipCodeRests() {
         `https://api.documenu.com/v2/restaurants/zip_code/${zip}?size=100&page=1&key=${key}`
       );
       setRestaurants(response.data);
+      setIsLoaded(true);
     };
     getRestaurants();
   }, [searched]);
@@ -57,6 +59,9 @@ export default function ZipCodeRests() {
       <div>
         <div>Zip Code Searched Page</div>
         <div>{restaurants.data[0].restaurant_name}</div>
+        <div>
+          <RestaurantCards restaurants={restaurants.data} />
+        </div>
       </div>
     );
   }
